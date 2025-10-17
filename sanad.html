@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سند للتكييف والتبريد</title>
+    <style>
+        /* أنماط CSS العامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* أنماط الرأس */
+        header {
+            background-color: rgba(26, 82, 118, 0.9);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+        
+        .logo span {
+            color: #3498db;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: #3498db;
+        }
+        
+        /* أنماط الأقسام العامة */
+        section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1a5276;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background-color: #3498db;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        /* أنماط قسم المقدمة */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            margin-top: 70px; /* لتعويض الهيدر الثابت */
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('condition2.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
+        
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 82, 118, 0.7); /* طبقة شفافة زرقاء */
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1); /* خلفية شفافة للنص */
+            backdrop-filter: blur(10px); /* تأثير ضبابي */
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+        }
+        
+        /* أنماط قسم الخدمات */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: #1a5276;
+        }
+        
+        /* أنماط قسم البروفيل */
+        .profile {
+            background-color: #e8f4fc;
+        }
+        
+        .profile-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .profile-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .profile-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .profile-info {
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .profile-info h2 {
+            color: #1a5276;
+            margin-bottom: 1rem;
+        }
+        
+        .profile-info p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .skill {
+            background-color: #3498db;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        /* أنماط نماذج الطلب */
+        .forms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+        
+        .form-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        /* أنماط قسم الاتصال */
+        .contact {
+            background-color: #1a5276;
+            color: white;
+        }
+        
+        .contact .section-title {
+            color: white;
+        }
+        
+        .contact .section-title::after {
+            background-color: #3498db;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: #3498db;
+        }
+        
+        .map {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        .map iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+        
+        /* أنماط التذييل */
+        footer {
+            background-color: #0d3a5c;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #3498db;
+        }
+        
+        /* أنماط الاستجابة */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem;
+            }
+            
+            .hero {
+                padding: 0;
+                height: 80vh;
+                margin-top: 120px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .forms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- رأس الموقع -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">سند <span>للتكييف والتبريد</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">الرئيسية</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#profile">البروفيل</a></li>
+                    <li><a href="#request">طلب الخدمة</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- قسم المقدمة -->
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>حلول متكاملة لأنظمة التكييف والتبريد</h1>
+            <p> 
+
+
+ 
+            <a href="#services" class="btn">استكشف خدماتنا</a>
+                <a href="work.html" class="btn" style="margin-right: 10px;">أعمالنا</a>
+
+        </div>
+    </section>
+   
+
+    <!-- قسم الخدمات -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">خدماتنا</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">❄️</div>
+                    <h3>تركيب أنظمة التكييف</h3>
+                    <p>نقوم بتركيب جميع أنواع أنظمة التكييف المركزية وأنظمة(PRF) والمنفصلة بأحدث التقنيات وضمان الجودة.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🔧</div>
+                    <h3>صيانة دورية</h3>
+                    <p>نقدم خدمات الصيانة الوقائية والدورية لضمان كفاءة وأداء مثالي لأنظمة التكييف والتبريد وصيانة الشلرات واصلاح الضواغط والكمبريسرات بكل انواعها .</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>إصلاح الأعطال</h3>
+                    <p>فريق متخصص في تشخيص وإصلاح جميع أعطال أنظمة التكييف والتبريد بسرعة واحترافية.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💡</div>
+                    <h3>استشارات فنية</h3>
+                    <p>نقدم استشارات فنية متخصصة لاختيار أنظمة التكييف والتبريد المناسبة لمتطلباتك وميزانيتك اضافة الى حساب الاحمال والتصميم.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم البروفيل -->
+    <section class="profile" id="profile">
+        <div class="container">
+            <h2 class="section-title">البروفيل الشخصي</h2>
+            <div class="profile-content">
+                <div class="profile-image">
+                    <img src="pic.png" alt="صورة المهندس">
+                </div>
+                <div class="profile-info">
+                    <h2>المهندس/ سند العريقي</h2>
+                    <p>مهندس تكييف وتبريد معتمد بخبرة تزيد عن 20 سنوات في مجال تصميم وتركيب وصيانة أنظمة التكييف والتبريد.</p>
+                    <p>حاصل على شهادات معتمدة من كبرى الشركات العالمية في مجال التكييف والتبريد، مع خبرة واسعة في التعامل مع جميع أنواع الأنظمة من المنزلية إلى التجارية والصناعية.</p>
+                    <p>أتعهد بتقديم خدمات عالية الجودة مع ضمان رضا العملاء التام، والعمل وفق أعلى معايير السلامة والأمان.</p>
+                    <p>نقديم حلول متكاملة لأنظمة التكييف والتبريد في جميع أنحاء اليمن. نهدف إلى تلبية احتياجات الأفراد والمؤسسات من خلال خدماتنا المتنوعة التي تشمل تركيب وصيانة أجهزة التكييف، تصميم أنظمة التبريد الصناعي والتجاري، وتوفير قطع الغيار الأصلية بأعلى جودة. نتميز بسرعة الاستجابة، وكفاءة الفرق الفنية، والتزامنا بأعلى معايير السلامة والجودة. أينما كنت في اليمن، فريق سند جاهز لخدمتك بكل احترافية واهتمام.<p>
+                    <h3>المهارات والخبرات</h3>
+                    <div class="skills">
+                        <span class="skill">تصميم أنظمة التكييف</span>
+                        <span class="skill">تركيب أنظمة التبريد</span>
+                        <span class="skill">الصيانة الوقائية</span>
+                        <span class="skill">إصلاح الأعطال</span>
+                        <span class="skill">تحسين كفاءة الطاقة</span>
+                        <span class="skill">أنظمة التكييف المركزي</span>
+                        <span class="skill">أنظمة التبريد التجارية</span>
+                        <span class="skill">التبريد بأنظمة الأمونيا</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم طلب الخدمة وتقديم المشكلة -->
+    <section id="request">
+        <div class="container">
+            <h2 class="section-title">طلب الخدمة وتقديم المشكلة</h2>
+            <div class="forms-grid">
+                <!-- نموذج طلب الخدمة -->
+                <div class="form-container">
+                    <h3>طلب خدمة</h3>
+                    <form id="service-request-form">
+                        <div class="form-group">
+                            <label for="service-name">الاسم الكامل</label>
+                            <input type="text" id="service-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-phone">رقم الهاتف</label>
+                            <input type="tel" id="service-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-email">البريد الإلكتروني</label>
+                            <input type="email" id="service-email">
+                        </div>
+                        <div class="form-group">
+                            <label for="service-type">نوع الخدمة المطلوبة</label>
+                            <select id="service-type" required>
+                                <option value="">اختر نوع الخدمة</option>
+                                <option value="installation">تركيب نظام جديد</option>
+                                <option value="maintenance">صيانة دورية</option>
+                                <option value="repair">إصلاح عطل</option>
+                                <option value="consultation">استشارة فنية</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="service-details">تفاصيل إضافية</label>
+                            <textarea id="service-details"></textarea>
+                        </div>
+                        <button type="submit" class="btn">إرسال طلب الخدمة</button>
+                    </form>
+                </div>
+                
+                <!-- نموذج تقديم المشكلة -->
+                <div class="form-container">
+                    <h3>تقديم مشكلة</h3>
+                    <form id="problem-report-form">
+                        <div class="form-group">
+                            <label for="problem-name">الاسم الكامل</label>
+                            <input type="text" id="problem-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="problem-phone">رقم الهاتف</label>
+                            <input type="tel" id="problem-phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="problem-address">العنوان</label>
+                            <input type="text" id="problem-address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="problem-type">نوع النظام</label>
+                            <select id="problem-type" required>
+                                <option value="">اختر نوع النظام</option>
+                                <option value="split">مكيف شباك/اسبليت</option>
+                                <option value="central">تكييف مركزي</option>
+                                <option value="commercial">نظام تبريد تجاري</option>
+                                <option value="other">أخرى</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="problem-description">وصف المشكلة</label>
+                            <textarea id="problem-description" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">إرسال المشكلة</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الاتصال -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">معلومات الاتصال</h2>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <h3>العنوان</h3>
+                            <p>شارع تونس، صنعاء، اليمن </p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div>
+                            <h3>الهاتف</h3>
+                            <p>775018829</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">✉️</div>
+                        <div>
+                            <h3>البريد الإلكتروني</h3>
+                            <p>sanadalariqi@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div>
+                            <h3>ساعات العمل</h3>
+                            <p>السبت - الخميس: 8 ص - 6 م<br>الجمعة: مغلق</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="map">
+<iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d480.89669479128656!2d44.201481!3d15.367084!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sar!2sus!4v1760660699619!5m2!1sar!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- تذييل الموقع -->
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">سند <span>للتكييف والتبريد</span></div>
+            <p>حلول متكاملة لأنظمة التكييف والتبريد بجودة عالية وأسعار منافسة</p>
+            <div class="social-links">
+                <a href="#">📘</a>
+                <a href="#">📷</a>
+                <a href="#">🐦</a>
+                <a href="#">💼</a>
+            </div>
+            <p>جميع الحقوق محفوظة &copy; 2023 سند للتكييف والتبريد</p>
+        </div>
+    </footer>
+
+    <script>
+        // رقم واتساب الافتراضي - يمكن تعديله
+        const whatsappNumber = "+967775018829";
+        
+        // وظيفة لإنشاء رابط واتساب مع الرسالة
+        function createWhatsAppLink(message) {
+            // ترميز الرسالة لاستخدامها في الرابط
+            const encodedMessage = encodeURIComponent(message);
+            // إنشاء رابط واتساب
+            return `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+        }
+        
+        // معالجة نموذج طلب الخدمة
+        document.getElementById('service-request-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // جمع البيانات من النموذج
+            const name = document.getElementById('service-name').value;
+            const phone = document.getElementById('service-phone').value;
+            const email = document.getElementById('service-email').value;
+            const serviceType = document.getElementById('service-type').options[document.getElementById('service-type').selectedIndex].text;
+            const details = document.getElementById('service-details').value;
+            
+            // إنشاء نص الرسالة
+            const message = `طلب خدمة جديد من موقع سند للتكييف والتبريد:
+الاسم: ${name}
+رقم الهاتف: ${phone}
+البريد الإلكتروني: ${email}
+نوع الخدمة: ${serviceType}
+تفاصيل إضافية: ${details}`;
+            
+            // إنشاء رابط واتساب
+            const whatsappLink = createWhatsAppLink(message);
+            
+            // فتح رابط واتساب في نافذة جديدة
+            window.open(whatsappLink, '_blank');
+            
+            // إعادة تعيين النموذج
+            this.reset();
+        });
+        
+        // معالجة نموذج تقديم المشكلة
+        document.getElementById('problem-report-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // جمع البيانات من النموذج
+            const name = document.getElementById('problem-name').value;
+            const phone = document.getElementById('problem-phone').value;
+            const address = document.getElementById('problem-address').value;
+            const problemType = document.getElementById('problem-type').options[document.getElementById('problem-type').selectedIndex].text;
+            const description = document.getElementById('problem-description').value;
+            
+            // إنشاء نص الرسالة
+            const message = `تقديم مشكلة من موقع سند للتكييف والتبريد:
+الاسم: ${name}
+رقم الهاتف: ${phone}
+العنوان: ${address}
+نوع النظام: ${problemType}
+وصف المشكلة: ${description}`;
+            
+            // إنشاء رابط واتساب
+            const whatsappLink = createWhatsAppLink(message);
+            
+            // فتح رابط واتساب في نافذة جديدة
+            window.open(whatsappLink, '_blank');
+            
+            // إعادة تعيين النموذج
+            this.reset();
+        });
+
+        // جعل الهيدر شفافاً عند التمرير
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.backgroundColor = 'rgba(26, 82, 118, 0.95)';
+            } else {
+                header.style.backgroundColor = 'rgba(26, 82, 118, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
